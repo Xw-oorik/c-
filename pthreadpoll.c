@@ -70,7 +70,7 @@ void *worker(void* arg)
         while(poll->queueSize==0&&!poll->shutdown)
         {
             //阻塞工作线程
-            pthread_cond_wait(&poll->notEmpty,&poll->mutexpoll);
+            pthread_cond_wait(&poll->notEmpty,&poll->mutexpoll);//拿锁进来，条件不满足，释放锁再次等着条件成立，阻塞在这
             //判断是不是要销毁线程
             if(poll->exitNum>0)
             {
